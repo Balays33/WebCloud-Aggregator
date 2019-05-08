@@ -43,3 +43,26 @@ function kiir(){
 
     document.getElementById("test").innerHTML = "Balazs";
 }
+
+function sendDataIsoUtc(){
+    console.log(Latitude, Longitude);
+    var http = new XMLHttpRequest();
+    const url = 'https://api.opencagedata.com/geocode/v1/json?q=47.499663+19.075570&key=a36ac62bfab44ff09eb13691ba88ea47';
+    http.open("GET", url);
+    http.send();
+    http.onreadystatechange = (e) => {
+        var response = http.responseText;
+        var responseJSON = JSON.parse(response);
+        console.log('openCageCC : '+responseJSON);
+        currencyCODE = responseJSON.results[0].annotations.currency.iso_code;
+        console.log('This is sending the location currency :'+currencyCODE);
+        var countryCode = responseJSON.results[0].components.country_code;
+        document.getElementById('littleFlagExchange').src = "https://www.countryflags.io/" + countryCode + "/shiny/32.png";
+        document.getElementById('currentcyTEXTL').innerHTML=currencyCODE;
+        document.getElementById('littleFlagExchangeLocal').src = "https://www.countryflags.io/" + countryCode + "/shiny/32.png";
+        document.getElementById('currentcyTEXTLC').innerHTML=currencyCODE;
+        //convert(currencyCODE);
+        //convertlocal(currencyCODE);
+    }
+
+}
