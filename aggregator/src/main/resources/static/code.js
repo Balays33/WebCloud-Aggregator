@@ -7,9 +7,11 @@ $$(document).on('deviceready', function() {
 });
 */
 
+/*
 $(document).ready(function(){
     getTime();
 });
+*/
 /*
 function getTime( ){
     var d = new Date();
@@ -40,29 +42,46 @@ function myTimer() {
   document.getElementById("gettimes").innerHTML = d.toLocaleTimeString();
 }
 function kiir(){
-
+    console.log('should wrk ');
     document.getElementById("test").innerHTML = "Balazs";
 }
 
-function sendDataIsoUtc(){
-    console.log(Latitude, Longitude);
+
+function sendDataIsoServer(){
+    //console.log(Latitude, Longitude);
     var http = new XMLHttpRequest();
-    const url = 'https://api.opencagedata.com/geocode/v1/json?q=47.499663+19.075570&key=a36ac62bfab44ff09eb13691ba88ea47';
+    const url = 'http://isodate.kubernetes.cafe/1234567/isodate';
     http.open("GET", url);
     http.send();
     http.onreadystatechange = (e) => {
         var response = http.responseText;
+        console.log(response);
         var responseJSON = JSON.parse(response);
-        console.log('openCageCC : '+responseJSON);
-        currencyCODE = responseJSON.results[0].annotations.currency.iso_code;
-        console.log('This is sending the location currency :'+currencyCODE);
-        var countryCode = responseJSON.results[0].components.country_code;
-        document.getElementById('littleFlagExchange').src = "https://www.countryflags.io/" + countryCode + "/shiny/32.png";
-        document.getElementById('currentcyTEXTL').innerHTML=currencyCODE;
-        document.getElementById('littleFlagExchangeLocal').src = "https://www.countryflags.io/" + countryCode + "/shiny/32.png";
-        document.getElementById('currentcyTEXTLC').innerHTML=currencyCODE;
-        //convert(currencyCODE);
-        //convertlocal(currencyCODE);
+        console.log('Data back frome Isodata server : '+responseJSON);
+        var isoDate = responseJSON.isoDate;
+        console.log('iso date: '+ isoDate);
+        document.getElementById('isodataHolder').innerHTML= isoDate;
+       
     }
 
 }
+
+function sendDataUtcServer(){
+    console.log('hu ha');
+    var http = new XMLHttpRequest();
+    const url = 'http://localhost:8081/utcDate/1234567';
+    http.open("GET", url);
+    http.send();
+    http.onreadystatechange = (e) => {
+        var response = http.responseText;
+        console.log(response);
+        var responseJSON = JSON.parse(response);
+        console.log('Data back frome Utcdata server : '+responseJSON);
+        var utcDate = responseJSON.date;
+        console.log('utc date: '+ utcDate);
+        document.getElementById('utcdataHolder').innerHTML= utcDate;
+       
+    }
+
+}
+

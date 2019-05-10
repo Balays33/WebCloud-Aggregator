@@ -10,6 +10,16 @@
                 alert('jQuery is ready')
             })
         </script>
+
+<httpProtocol>  
+    <customHeaders>  
+     <add name="Access-Control-Allow-Origin" value="*" />  
+     <add name="Access-Control-Allow-Headers" value="Content-Type" />  
+     <add name="Access-Control-Allow-Methods" value="GET, POST, PUT, DELETE, OPTIONS" />  
+    </customHeaders>  
+  </httpProtocol> 
+
+
     </head>
     <body>
         <div>
@@ -17,13 +27,18 @@
             <h2>SB18002</h2>
 
             Timestamp: <input id="Timestamp" type="number"  value="19830903"><br>
-            <button class="col button button-outline button-round" onclick="sendDataIsoUtc()">Round</button>
+            <button class="col button button-outline button-round" onclick="sendDataIsoServer()">sendDataIsoServer</button>
+            <br>
+            ISO date: <div id="isodataHolder" >Waiting for the iso date</div>
+            UTC date: <div id="utcdataHolder" >Waiting for the utc date</div>
+            <hr>
+            <hr>
             <div id="gettimes">Time here</div>
             <div id="test">test</div>
             <div class="block">
                 <div class="row">
-                  <button class="col button button-outline">Button</button>
-                  <button class="col button button-outline">Button</button>
+                  <button class="col button button-outline" onclick="sendDataUtcServer()">sendDataUtcServer</button>
+                  <button class="col button button-outline" onclick="kiir()">Kiir2</button>
                   <button class="col button button-outline button-round" onclick="kiir()">Round</button>
                 </div>
               </div>
