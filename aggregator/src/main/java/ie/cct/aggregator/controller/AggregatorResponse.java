@@ -8,6 +8,7 @@ public class AggregatorResponse {
 
     public AggregatorResponse(String isoDate , String utcDate) {
         this.isoDate = isoDate;
+        this.utcDate = utcDate;
     }
     
     public String getIsoDate() {

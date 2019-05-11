@@ -8,8 +8,6 @@ function myTimer() {
   console.log(autoUpdateTime);
   sendDataIsoServerAUpdateTime(autoUpdateTime);
   sendDataUtcServerAUpdateTime(autoUpdateTime);
-
-
 }
 
 
